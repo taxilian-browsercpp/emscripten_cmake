@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Test page for the pnacl example</title>
+        <script src="libemsdk_test.js"></script>
+    </head>
+    <body>
+
+        <script language="javascript">
+            function EMJS_Wrapper() {
+                if (!(this instanceof EMJS_Wrapper)) {
+                    return new EMJS_Wrapper();
+                }
+                this.test1 = Module.cwrap("test1", 'number', ['number']);
+
+                var _testBuffer = Module.cwrap("testBuffer", 'string', ['number', 'number', 'number']);
+                this.testBuffer = function(width, height, pixels) {
+                    var buf = Module._malloc(width*height);
+                    Module.HEAPU8.set(pixels, buf);
+                    var res = _readImage(width, height, buf);
+                    Module._free(buf);
+                    return res;
+                };
+
+                this.getVersion = Module.cwrap("getVersion", 'string');
+                return this;
+            }
+            document.addEventListener( "DOMContentLoaded", function() {
+
+            });
+
+        </script>
+    </body>
+</html>

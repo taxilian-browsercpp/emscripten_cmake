@@ -1,5 +1,5 @@
 #!/bin/bash
-PLUGIN_PATH="$( cd "$( dirname "$0" )" && cd .. && pwd )"
+PLUGIN_PATH="$( cd "$( dirname "$0" )" && pwd )"
 pushd $PLUGIN_PATH
 
 function run_or_fail {
